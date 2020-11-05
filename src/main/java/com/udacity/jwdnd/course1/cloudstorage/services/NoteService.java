@@ -1,6 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
+import com.udacity.jwdnd.course1.cloudstorage.model.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import java.util.List;
 public class NoteService {
 
     private NoteMapper noteMapper;
+    private NoteForm noteForm;
 
-    public NoteService(NoteMapper noteMapper) {
+    public NoteService(NoteMapper noteMapper, NoteForm noteForm) {
         this.noteMapper = noteMapper;
+        this.noteForm = noteForm;
     }
 
     public List<Note> getAllNotes(int userId) throws Exception {
@@ -23,11 +26,11 @@ public class NoteService {
         return notes;
     }
 
-    public Boolean addNote(Note note, int userId) {
-        String noteTitle = note.getNoteTitle();
-        String noteDescription = note.getNoteDescription();
-        Integer noteId = note.getNoteId();
-        this.noteMapper.insert(noteTitle, noteDescription, noteId);
+    public Boolean addNote(NoteForm noteForm) {
+        String noteTitle = noteForm.getNoteTitle();
+        String noteDescription = noteForm.getNoteDescription();
+        Integer userId = noteForm.getUserId();
+        this.noteMapper.insert(noteTitle, noteDescription, userId);
         return true;
     }
 
