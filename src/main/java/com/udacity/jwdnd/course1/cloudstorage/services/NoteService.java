@@ -26,7 +26,7 @@ public class NoteService {
         return notes;
     }
 
-    public Boolean addNote(NoteForm noteForm) {
+    public Boolean insertNote(NoteForm noteForm) {
         String noteTitle = noteForm.getNoteTitle();
         String noteDescription = noteForm.getNoteDescription();
         Integer userId = noteForm.getUserId();
