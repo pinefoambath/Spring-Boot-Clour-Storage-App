@@ -37,6 +37,10 @@ public class User {
         return salt;
     }
 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public String getPassword() {
         return password;
     }
