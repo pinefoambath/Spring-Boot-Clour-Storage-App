@@ -18,7 +18,7 @@ public class FilesController {
 
     @PostMapping("/files")
     public String insertFile(AuthenticationService authenticationService, MultipartFile fileUpload) throws Exception {
-        User user = (User) authenticationService.getPrincipal();
+        User user = (User) authenticationService.authenticate();
         if (fileUpload.isEmpty()) {
             return "redirect:/result?error";
         }
