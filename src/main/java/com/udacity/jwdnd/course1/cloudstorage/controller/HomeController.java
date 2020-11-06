@@ -29,8 +29,8 @@ public class HomeController {
 
     @GetMapping
     // we declare a NoteForm object, which allows the app to initialise a POJO for the Noteform backend
-    public String getNoteForm (NoteForm noteForm, Model model) {
-        model.addAttribute("Notes", this.noteService.getAllNotes(userId));
+    public String getNoteForm (NoteForm noteForm, Model model) throws Exception {
+        model.addAttribute("Notes", this.noteService.getAllNotes(noteForm.getUserId));
         return "home";
     }
 }
