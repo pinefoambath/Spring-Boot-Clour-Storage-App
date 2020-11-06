@@ -21,9 +21,9 @@ class CloudStorageApplicationTests {
 	private static String lastName = "checkLastName";
 	private static String userName = "root";
 	private static String password = "password";
-	private static String noteTitle = "Super test title";
-	private static String noteDescription = "Super test description";
-	private static String credURL = "example.com";
+	private static String noteTitle = "test title";
+	private static String noteDescription = "test description";
+	private static String credURL = "rollmops.com";
 
 	@LocalServerPort
 	private int port;
@@ -245,6 +245,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Result", driver.getTitle());
 	}
 
+    //	Write a test that creates a set of credentials, verifies that they are displayed, and verifies that the displayed password is encrypted.
 	@Test
 	public void createCredentials() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -290,6 +291,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertTrue(created);
 	}
 
+	//Write a test that views an existing set of credentials, verifies that the viewable password is unencrypted, edits the credentials, and verifies that the changes are displayed.
 	@Test
 	public void updateCredential() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -345,6 +347,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
+	//Write a test that deletes an existing set of credentials and verifies that the credentials are no longer displayed.
 	public void credentialDeletionTest() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -375,9 +378,3 @@ class CloudStorageApplicationTests {
 	}
 
 }
-//		Write a test that signs up a new user, logs in, verifies that the home page is accessible, logs out, and verifies that the home page is no longer accessible.
-//
-//		3. Write Tests for Credential Creation, Viewing, Editing, and Deletion.
-//		Write a test that creates a set of credentials, verifies that they are displayed, and verifies that the displayed password is encrypted.
-//		Write a test that views an existing set of credentials, verifies that the viewable password is unencrypted, edits the credentials, and verifies that the changes are displayed.
-//		Write a test that deletes an existing set of credentials and verifies that the credentials are no longer displayed.

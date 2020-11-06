@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileForm;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +18,8 @@ public class FilesController {
     private FileForm fileForm;
 
     @PostMapping("/files")
-    public String insertFile(AuthenticationService authenticationService, MultipartFile fileUpload) throws Exception {
-        User user = (User) authenticationService.authenticate();
+    public String insertFile(AuthenticationService authenticationService, MultipartFile fileUpload, Authentication auth) throws Exception {
+        User user = (User) authenticationService.authenticate(auth);
         if (fileUpload.isEmpty()) {
             return "redirect:/result?error";
         }
