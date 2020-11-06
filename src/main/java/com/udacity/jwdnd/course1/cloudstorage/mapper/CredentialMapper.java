@@ -13,7 +13,7 @@ public interface CredentialMapper {
     Credential getCredential(Integer credentialId);
 
     @Select("SELECT * FROM CREDENTIALS WHERE userId = #{userId}")
-    List<Credential> geCredentialsForUser(Integer userId);
+    List<Credential> getCredentialsByUserId(Integer userId);
 
 
     @Insert("INSERT INTO CREDENTIALS(fileName) VALUES(#{fileName)")
