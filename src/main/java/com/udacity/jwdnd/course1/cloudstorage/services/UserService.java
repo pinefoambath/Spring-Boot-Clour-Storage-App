@@ -22,12 +22,12 @@ public class UserService {
         return userMapper.getUser(username) == null;
     }
 
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userMapper.findByUsername(username);
-        if (User == null) {
-            throw new UsernameNotFoundException("");
+    public User loadUserByUsername(String username) throws Exception {
+        User user = userMapper.getUser(username);
+        if (user == null) {
+            throw new Exception("");
         }
-        return User;
+        return user;
     }
 
 
