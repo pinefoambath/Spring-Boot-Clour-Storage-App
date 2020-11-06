@@ -22,6 +22,15 @@ public class UserService {
         return userMapper.getUser(username) == null;
     }
 
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userMapper.findByUsername(username);
+        if (User == null) {
+            throw new UsernameNotFoundException("");
+        }
+        return User;
+    }
+
+
     public int createUser(User user) {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];

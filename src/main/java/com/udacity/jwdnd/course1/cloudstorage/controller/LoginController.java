@@ -28,11 +28,11 @@ public class LoginController {
 
         String loggedInUser = (authentication.getPrincipal().toString());
 
-        User userDetails = userService.findByUsername(loggedInUser);
+        User user = userService.getUser(loggedInUser);
 
-        if (userDetails != null) {
+        if (user != null) {
 
-            session.setAttribute("loggeduser", userDetails);
+            session.setAttribute("loggeduser", user);
 
         } else {
 
