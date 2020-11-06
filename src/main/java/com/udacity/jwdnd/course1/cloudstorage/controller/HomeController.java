@@ -4,15 +4,14 @@ import com.udacity.jwdnd.course1.cloudstorage.model.*;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.*;
+import javax.servlet.http.HttpSession;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
 
 @Controller
 // telling it that this controller oversees everything in the /home folder
@@ -24,27 +23,41 @@ public class HomeController {
     private final FileService fileService;
     private final CredentialService credentialService;
     private UserMapper userMapper;
+    private AuthenticationService authenticationService;
 
-
-    public HomeController(UserService userService, NoteService noteService, FileService fileService) {
+    public HomeController(UserService userService, NoteService noteService, FileService fileService, CredentialService credentialService, UserMapper userMapper, AuthenticationService authenticationService) {
         this.userService = userService;
         this.noteService = noteService;
         this.fileService = fileService;
+        this.credentialService = credentialService;
+        this.userMapper = userMapper;
+        this.authenticationService = authenticationService;
     }
 
-    @GetMapping
 
-    public String homePage(Authentication authentication, Model model){
-        String username = authentication.getName();
-        User user = userMapper.getUser(username);
-        Integer userId = user.getUserId();
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
 
-        return username;
-    }
-    // we declare a NoteForm object, which allows the app to initialise a POJO for the Noteform backend
-    public String getNoteForm (NoteForm noteForm, Model model) throws Exception {
-        model.addAttribute("Notes", this.noteService.getAllNotes(noteForm.getUserId()));
+    public String getHomePage(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggeduser");
+
+        model.addAttribute("User", user);
+
+        List<File> files = fileService.getAllFiles(user.getUserId());
+
+        List<Note> notes = noteService.getAllNotes(user.getUserId());
+
+        List<Credential> credentials = credentialService.getCredentialsByUserId(user.getUserId());
+
+        model.addAttribute("Files", files);
+
+        model.addAttribute("Notes", notes);
+
+        model.addAttribute("Credentials", credentials);
+
         return "home";
+
     }
+
 
 }
