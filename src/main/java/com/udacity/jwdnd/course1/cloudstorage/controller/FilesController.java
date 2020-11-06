@@ -3,7 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileForm;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
 import org.springframework.web.multipart.MultipartFile;
