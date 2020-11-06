@@ -28,7 +28,7 @@ public class LoginController {
 
         String loggedInUser = (authentication.getPrincipal().toString());
 
-        User user = userService.getUser(loggedInUser);
+        User user = userService.loadUserByUsername(loggedInUser);
 
         if (user != null) {
 
