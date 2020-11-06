@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.*;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
+import com.udacity.jwdnd.course1.cloudstorage.mapper.*;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class HomeController {
     private final NoteService noteService;
     private final FileService fileService;
     private final CredentialService credentialService;
+    private UserMapper userMapper;
 
 
     public HomeController(UserService userService, NoteService noteService, FileService fileService) {
@@ -36,7 +38,7 @@ public class HomeController {
         String username = authentication.getName();
         User user = userMapper.findByUsername(username);
         Integer userId = user.getUserId();
-       ...
+
     }
     // we declare a NoteForm object, which allows the app to initialise a POJO for the Noteform backend
     public String getNoteForm (NoteForm noteForm, Model model) throws Exception {
