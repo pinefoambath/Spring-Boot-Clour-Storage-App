@@ -5,8 +5,9 @@ import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileForm;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FilesController {
@@ -16,7 +17,7 @@ public class FilesController {
     private FileForm fileForm;
 
     @PostMapping("/files")
-    public String insertFile(AuthenticationService authenticationService, MultipartFile fileUpload) throws IOException {
+    public String insertFile(AuthenticationService authenticationService, MultipartFile fileUpload) throws Exception {
         User user = (User) authenticationService.getPrincipal();
         if (fileUpload.isEmpty()) {
             return "redirect:/result?error";
