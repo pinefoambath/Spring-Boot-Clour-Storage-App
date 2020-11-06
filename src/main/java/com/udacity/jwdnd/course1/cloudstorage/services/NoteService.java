@@ -11,11 +11,11 @@ import java.util.List;
 public class NoteService {
 
     private NoteMapper noteMapper;
-    private NoteForm noteForm;
+    // the below was wrong; as I instantiated it in here we missed that actually we're working with a NoteForm from the th:object, so n
+    // private NoteForm noteForm;
 
-    public NoteService(NoteMapper noteMapper, NoteForm noteForm) {
+    public NoteService(NoteMapper noteMapper) {
         this.noteMapper = noteMapper;
-        this.noteForm = noteForm;
     }
 
     public List<Note> getAllNotes(int userId) throws Exception {

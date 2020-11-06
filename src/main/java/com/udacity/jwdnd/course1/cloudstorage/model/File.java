@@ -6,9 +6,9 @@ public class File {
     private String contentType;
     private String fileSize;
     private Integer userId;
-    private byte[] fileData;
+    private Byte[] fileData;
 
-    public File(Integer fileId, String fileName, String contentType, String fileSize, Integer userId, byte[] fileData) {
+    public File(Integer fileId, String fileName, String contentType, String fileSize, Integer userId, Byte[] fileData) {
         this.fileId = fileId;
         this.fileName = fileName;
         this.contentType = contentType;
@@ -57,11 +57,11 @@ public class File {
         this.userId = userId;
     }
 
-    public byte[] getFileData() {
+    public Byte[] getFileData() {
         return fileData;
     }
 
-    public void setFileData(byte[] fileData) {
+    public void setFileData(Byte[] fileData) {
         this.fileData = fileData;
     }
 }
