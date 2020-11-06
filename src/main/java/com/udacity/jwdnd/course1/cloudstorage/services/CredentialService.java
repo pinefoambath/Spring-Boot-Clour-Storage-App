@@ -7,7 +7,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.NoteForm;
 import org.springframework.stereotype.Service;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ public class CredentialService {
     private EncryptionService encryptionService;
 
     public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService) {
-        CredentialMapper = credentialMapper;
+        this.credentialMapper = credentialMapper;
         this.encryptionService = encryptionService;
     }
 
     private Credential encryptValue(Credential credential) {
-        String key = RandomStringUtils.random(16, true, true);
+        String key = StringUtils.random(16, true, true);
         credential.setKey(key);
         credential.setPassword(encryptionService.encryptValue(credential.getPassword(), key));
         return credential;

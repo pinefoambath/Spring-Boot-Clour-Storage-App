@@ -34,21 +34,17 @@ public class HomeController {
 
     @GetMapping
 
-    public String homePage(Authentication authentication, HttpSession session, Model model){
+    public String homePage(Authentication authentication, Model model){
         String username = authentication.getName();
-        User user = userMapper.findByUsername(username);
+        User user = userMapper.getUser(username);
         Integer userId = user.getUserId();
 
+        return username;
     }
     // we declare a NoteForm object, which allows the app to initialise a POJO for the Noteform backend
     public String getNoteForm (NoteForm noteForm, Model model) throws Exception {
         model.addAttribute("Notes", this.noteService.getAllNotes(noteForm.getUserId()));
         return "home";
     }
-}
 
-    @GetMapping()
-    public String getHomePage(MessageForm messageForm, Model model) {
-        model.addAttribute("greetings", this.messageListService.getMessages());
-        return "home";
-    }
+}
