@@ -24,7 +24,7 @@ public class FileService {
         return files;
     }
 
-    public Boolean insertNote(FileForm fileForm) {
+    public Boolean addFile(FileForm fileForm) {
         String fileName = fileForm.getFileName();
         String contentType = fileForm.getContentType();
         Integer userId = fileForm.getUserId();

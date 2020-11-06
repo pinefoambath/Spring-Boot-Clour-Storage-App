@@ -36,7 +36,7 @@ public class HomeController {
 
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-
+// need to tell it that some methods in here throw exceptions
     public String getHomePage(Model model, HttpSession session) throws Exception {
 
         User user = (User) session.getAttribute("loggeduser");

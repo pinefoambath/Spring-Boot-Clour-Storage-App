@@ -6,19 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 
 import java.time.Duration;
 import java.util.List;
@@ -55,8 +47,8 @@ class CloudStorageApplicationTests {
 		}
 	}
 
-	//1. Write Tests for User Signup, Login, and Unauthorized Access Restrictions.
-//		Write a test that verifies that an unauthorized user can only access the login and signup pages.
+//	1. Write Tests for User Signup, Login, and Unauthorized Access Restrictions.
+//   Write a test that verifies that an unauthorized user can only access the login and signup pages.
 	@Test
 	public void getLoginPage() {
 		driver.get("http://localhost:" + this.port + "/login");
@@ -84,7 +76,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
-	public void newUserAccessTest() {
+	public void UserSignUpLogInLogOut() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		// write a test for user signup
 		driver.get("http://localhost:" + this.port + "/signup");
@@ -123,15 +115,10 @@ class CloudStorageApplicationTests {
 		driver.get("http://localhost:" + this.port + "/home");
 		Assertions.assertEquals("Login", driver.getTitle());
 	}
-//
-//	2. Write Tests for Note Creation, Viewing, Editing, and Deletion.
-////  Write a test that creates a note, and verifies it is displayed.
-//		Write a test that edits an existing note and verifies that the changes are displayed.
-//		Write a test that deletes a note and verifies that the note is no longer displayed.
 
 	@Test
-//	Write a test that creates a note, and verifies it is displayed.
-	public void noteCreationTest() {
+ 	//	Write a test that creates a note, and verifies it is displayed.
+	public void createAndCheckNote() {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		//login
@@ -175,7 +162,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
-	public void noteUpdationTest() {
+	public void updateNote() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String newNoteTitle = "new note title";
@@ -229,7 +216,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
-	public void noteDeletionTest() {
+	public void deleteNote() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		//login
@@ -259,7 +246,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
-	public void credentialCreationTest() {
+	public void createCredentials() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		//login
@@ -304,7 +291,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@Test
-	public void credentialUpdationTest() {
+	public void updateCredential() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String newCredUsername = "newUser";
