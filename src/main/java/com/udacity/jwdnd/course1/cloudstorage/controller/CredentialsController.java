@@ -1,13 +1,12 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
-import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
-import com.udacity.jwdnd.course1.cloudstorage.model.CredentialForm;
-import com.udacity.jwdnd.course1.cloudstorage.model.FileForm;
-import com.udacity.jwdnd.course1.cloudstorage.model.NoteForm;
+import com.udacity.jwdnd.course1.cloudstorage.model.*;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
+
+import javax.servlet.http.HttpSession;
 
 
 public class CredentialsController {
@@ -29,11 +28,13 @@ public class CredentialsController {
     }
 
     // VIEW OR EDIT
-    @PostMapping("/credentials")
-    public String update(Authentication authentication, CredentialForm credentialForm, Model model) {
-
+        @PostMapping("/credentials")
+        public String update(Authentication authentication, CredentialForm credentialForm, Model model, HttpSession session) {
+            User user = (User) session.getAttribute("loggeduser");
+            model.addAttribute("User", user);
+            Integer userId = user.getUserId();
         //check if there are any credentials to update
-        if(this.credentialService.getCredentialsByUserId(userService.getUser(userId){
+        if(this.credentialService.getCredentialsByUserId(userService.getUser(userId))){
             this.credentialService.update(credentialForm, userId);
         } else {
             this.credentialService.insert(this.credential, userId);

@@ -17,13 +17,13 @@ import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CloudStorageApplicationTests {
+	private static String userName = "Erika";
+	private static String password = "123456";
+	private static String noteTitle = "My test";
+	private static String noteDescription = "test description";
+	private static String URL = "rollmops.com";
 	private static String firstName = "checkFirstName";
 	private static String lastName = "checkLastName";
-	private static String userName = "root";
-	private static String password = "password";
-	private static String noteTitle = "test title";
-	private static String noteDescription = "test description";
-	private static String credURL = "rollmops.com";
 
 	@LocalServerPort
 	private int port;
@@ -265,7 +265,7 @@ class CloudStorageApplicationTests {
 		wait.withTimeout(Duration.ofSeconds(30));
 		WebElement newCred = driver.findElement(By.id("newcred"));
 		wait.until(ExpectedConditions.elementToBeClickable(newCred)).click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("credential-url"))).sendKeys(credURL);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("credential-url"))).sendKeys(URL);
 		WebElement credUsername = driver.findElement(By.id("credential-username"));
 		credUsername.sendKeys(userName);
 		WebElement credPassword = driver.findElement(By.id("credential-password"));
