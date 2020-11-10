@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
@@ -26,6 +27,13 @@ public class LoginController {
         this.authenticationService = authenticationService;
     }
 
+    @GetMapping("/login")
+    public String getHomePage()
+    {
+        return "login";
+    }
+
+    @PostMapping("/postLogin")
     public String postLogin(Model model, HttpSession session) throws Exception {
 
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
