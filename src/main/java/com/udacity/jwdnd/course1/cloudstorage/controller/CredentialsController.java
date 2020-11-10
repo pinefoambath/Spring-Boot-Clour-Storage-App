@@ -27,7 +27,7 @@ public class CredentialsController {
         this.credentialForm = credentialForm;
     }
 
-    // VIEW OR EDIT
+    // VIEW or EDIT
         @PostMapping("/credentials")
         public String update(Authentication authentication, CredentialForm credentialForm, Model model, HttpSession session) {
             User user = (User) session.getAttribute("loggeduser");

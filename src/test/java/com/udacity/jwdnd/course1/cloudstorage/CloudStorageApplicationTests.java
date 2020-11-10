@@ -377,4 +377,23 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Result", driver.getTitle());
 	}
 
+	@Test
+	//URL redirection
+	public void urlRedirectsToErrorPage() {
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		//login
+		driver.get("http://localhost:" + this.port + "/login");
+		WebElement inputUsername = driver.findElement(By.id("inputUsername"));
+		inputUsername.sendKeys(userName);
+		WebElement inputPassword = driver.findElement(By.id("inputPassword"));
+		inputPassword.sendKeys(password);
+		WebElement loginButton = driver.findElement(By.id("login-button"));
+		loginButton.click();
+		//not sure how to set the below up correctly - how do I append the first part of the URl to this?
+		driver.get(baseUrl + "/home/helooooo");
+		Assertions.assertEquals("Error", driver.getTitle());
+
+	}
+
 }
