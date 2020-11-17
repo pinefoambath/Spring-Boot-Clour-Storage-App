@@ -24,6 +24,7 @@ class CloudStorageApplicationTests {
 	private static String URL = "rollmops.com";
 	private static String firstName = "checkFirstName";
 	private static String lastName = "checkLastName";
+	private static String baseUrl = "http://localhost:";
 
 	@LocalServerPort
 	private int port;
@@ -37,7 +38,9 @@ class CloudStorageApplicationTests {
 
 	@BeforeEach
 	public void beforeEach() {
+
 		this.driver = new ChromeDriver();
+		baseUrl += port;
 	}
 
 	@AfterEach
@@ -298,7 +301,7 @@ class CloudStorageApplicationTests {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String newCredUsername = "newUser";
 		//login
-		driver.get("http://localhost:" + this.port + "/login");
+		driver.get(baseUrl + "/login");
 		WebElement inputUsername = driver.findElement(By.id("inputUsername"));
 		inputUsername.sendKeys(userName);
 		WebElement inputPassword = driver.findElement(By.id("inputPassword"));
@@ -382,18 +385,33 @@ class CloudStorageApplicationTests {
 	public void urlRedirectsToErrorPage() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		String firstName = "Erin";
+		String lastName = "schmidt";
+		String username = "sasuke";
+		String password = "1234";
+		//signup
+		driver.get(baseUrl + "/signup");
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("inputFirstName"))));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputFirstName")));
+		jse.executeScript("arguments[0].value='" + firstName + "';", driver.findElement(By.id("inputFirstName")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputLastName")));
+		jse.executeScript("arguments[0].value='" + lastName + "';", driver.findElement(By.id("inputLastName")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputUsername")));
+		jse.executeScript("arguments[0].value='" + username + "';", driver.findElement(By.id("inputUsername")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputPassword")));
+		jse.executeScript("arguments[0].value='" + password + "';", driver.findElement(By.id("inputPassword")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("submit-button")));
 		//login
-		driver.get("http://localhost:" + this.port + "/login");
-		WebElement inputUsername = driver.findElement(By.id("inputUsername"));
-		inputUsername.sendKeys(userName);
-		WebElement inputPassword = driver.findElement(By.id("inputPassword"));
-		inputPassword.sendKeys(password);
-		WebElement loginButton = driver.findElement(By.id("login-button"));
-		loginButton.click();
+		wait.until(ExpectedConditions.titleContains("Login"));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputUsername")));
+		jse.executeScript("arguments[0].value='" + username + "';", driver.findElement(By.id("inputUsername")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputPassword")));
+		jse.executeScript("arguments[0].value='" + password + "';", driver.findElement(By.id("inputPassword")));
+		jse.executeScript("arguments[0].click();", driver.findElement(By.id("login-button")));
 		//not sure how to set the below up correctly - how do I append the first part of the URl to this?
+		wait.until(ExpectedConditions.titleContains("Home"));
 		driver.get(baseUrl + "/home/helooooo");
+		wait.until(ExpectedConditions.titleContains("Error"));
 		Assertions.assertEquals("Error", driver.getTitle());
-
 	}
-
 }

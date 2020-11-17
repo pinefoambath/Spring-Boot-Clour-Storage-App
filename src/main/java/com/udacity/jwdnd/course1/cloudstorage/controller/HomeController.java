@@ -7,6 +7,7 @@ import com.udacity.jwdnd.course1.cloudstorage.mapper.*;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @GetMapping
 // need to tell it that some methods in here throw exceptions
     public String getHomePage(Model model, HttpSession session) throws Exception {
 

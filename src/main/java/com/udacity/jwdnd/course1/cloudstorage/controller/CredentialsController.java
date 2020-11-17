@@ -17,6 +17,7 @@ public class CredentialsController {
     private FileService fileService;
     private UserService userService;
     private CredentialForm credentialForm;
+    private Credential credential;
 
     public CredentialsController(CredentialService credentialService, NoteService noteService, EncryptionService encryptionService, FileService fileService, UserService userService) {
         this.credentialService = credentialService;
@@ -25,6 +26,7 @@ public class CredentialsController {
         this.fileService = fileService;
         this.userService = userService;
         this.credentialForm = credentialForm;
+        this.credential = credential;
     }
 
     // VIEW or EDIT
@@ -35,7 +37,7 @@ public class CredentialsController {
             Integer userId = user.getUserId();
         //check if there are any credentials to update
         if(this.credentialService.getCredentialsByUserId(userService.getUser(userId))){
-            this.credentialService.update(credentialForm, userId);
+            this.credentialService.update(credential, userId);
         } else {
             this.credentialService.insert(this.credential, userId);
         }
