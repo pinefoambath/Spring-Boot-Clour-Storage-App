@@ -31,18 +31,16 @@ public class CredentialsController {
 
     // VIEW or EDIT
         @PostMapping("/credentials")
-        public String update(Authentication authentication, CredentialForm credentialForm, Model model, HttpSession session) {
+        public String update(Authentication authentication, CredentialForm credentialForm, Model model, HttpSession session) throws Exception {
             User user = (User) session.getAttribute("loggeduser");
             model.addAttribute("User", user);
             Integer userId = user.getUserId();
-        //check if there are any credentials to update
-        if(this.credentialService.getCredentialsByUserId(userService.getUser(userId))){
-            this.credentialService.update(credential, userId);
-        } else {
+        //check if there are any credentials to update, otherwise insert new credentials
+        if(this.credentialService.getCredentialsByUserId(userId) == null) {
             this.credentialService.insert(this.credential, userId);
+        } else {
+            this.credentialService.update(credential, userId);
         }
-
-        getCredentialDetails(authentication, model);
 
         return "home";
     }

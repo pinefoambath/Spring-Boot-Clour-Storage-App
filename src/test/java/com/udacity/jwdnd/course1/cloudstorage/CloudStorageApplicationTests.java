@@ -389,6 +389,7 @@ class CloudStorageApplicationTests {
 		String lastName = "schmidt";
 		String username = "sasuke";
 		String password = "1234";
+
 		//signup
 		driver.get(baseUrl + "/signup");
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("inputFirstName"))));
@@ -408,7 +409,7 @@ class CloudStorageApplicationTests {
 		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputPassword")));
 		jse.executeScript("arguments[0].value='" + password + "';", driver.findElement(By.id("inputPassword")));
 		jse.executeScript("arguments[0].click();", driver.findElement(By.id("login-button")));
-		//not sure how to set the below up correctly - how do I append the first part of the URl to this?
+
 		wait.until(ExpectedConditions.titleContains("Home"));
 		driver.get(baseUrl + "/home/helooooo");
 		wait.until(ExpectedConditions.titleContains("Error"));
