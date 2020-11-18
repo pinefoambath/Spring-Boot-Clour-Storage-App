@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+// this service builds on the Spring AuthenticationProvider
 @Service
 public class AuthenticationService implements AuthenticationProvider {
     private UserMapper userMapper;

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/notes")
 public class NotesController {
     private NoteService noteService;
     private Note note;
@@ -31,13 +30,13 @@ public class NotesController {
         model.addAttribute("User", user);
         Integer userId = user.getUserId();
         //check if there are any notes to update, otherwise insert new note
-        if(this.note.getNoteId() == null) {
+        if(this.noteForm.getNoteId() == null) {
             this.noteService.insertNote(this.noteForm);
         } else {
             this.noteService.updateNote(this.note);
         }
 
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/notes/delete")
