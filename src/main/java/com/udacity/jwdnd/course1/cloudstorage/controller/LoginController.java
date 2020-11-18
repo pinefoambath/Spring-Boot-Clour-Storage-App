@@ -33,20 +33,19 @@ public class LoginController {
     {
         return "login";
     }
-    @PostMapping("/postLogin")
-    public String postLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws Exception {
-        System.out.println("HELLO LOGIN");
-        System.out.println("PRINT:" + username);
-        User user = userService.loadUserByUsername(username);
-        Authentication result = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        SecurityContextHolder.getContext().setAuthentication(result);
-        if (user != null) {
-            System.out.println("HERE I");
-            session.setAttribute("loggeduser", user);
-        } else {
-            System.out.println("HERE II");
-            session.setAttribute("loggeduser", username);
-        }
-        return "redirect:/home";
+//    @PostMapping("/postLogin")
+//    public String postLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws Exception {
+//        System.out.println("HELLO LOGIN");
+//        System.out.println("PRINT:" + username);
+//        User user = userService.loadUserByUsername(username);
+//        Authentication result = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//        SecurityContextHolder.getContext().setAuthentication(result);
+//        if (user != null) {
+//            System.out.println("HERE I");
+//            session.setAttribute("loggeduser", user);
+//        } else {
+//            System.out.println("HERE II");
+//            session.setAttribute("loggeduser", username);
+//        }
+//        return "redirect:/home";
     }
-}

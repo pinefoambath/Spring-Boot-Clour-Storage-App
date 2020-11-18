@@ -37,9 +37,9 @@ public class CredentialsController {
             Integer userId = user.getUserId();
         //check if there are any credentials to update, otherwise insert new credentials
         if(this.credentialService.getCredentialsByUserId(userId) == null) {
-            this.credentialService.insert(this.credential, userId);
+            this.credentialService.insert(this.credentialForm);
         } else {
-            this.credentialService.update(credential, userId);
+            this.credentialService.update(this.credentialForm);
         }
 
         return "home";

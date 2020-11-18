@@ -36,11 +36,11 @@ public class HomeController {
     }
 
 
-    @GetMapping
+    @RequestMapping
 // need to tell it that some methods in here throw exceptions
-    public String getHomePage(Model model, HttpSession session) throws Exception {
+    public String getHomePage(Authentication authentication, Model model) throws Exception {
 
-        User user = (User) session.getAttribute("loggeduser");
+        Integer UID = userMapper.getuser(auth.getName()) ;
 
         model.addAttribute("User", user);
 
@@ -48,7 +48,7 @@ public class HomeController {
 
         List<Note> notes = noteService.getAllNotes(user.getUserId());
 
-        List<Credential> credentials = credentialService.getCredentialsByUserId(user.getUserId());
+        List<Credential> credentials = credentialService.getCredentialsByUserId(userMapper.getUserId());
 
         model.addAttribute("Files", files);
 

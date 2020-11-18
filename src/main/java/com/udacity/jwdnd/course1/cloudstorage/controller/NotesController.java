@@ -6,6 +6,7 @@ import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
@@ -18,11 +19,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class NotesController {
-    private NoteService noteService;
     private Note note;
     private UserService userService;
     private NoteForm noteForm;
 
+    @Autowired
+    NoteService noteService;
 
     @PostMapping("/notes")
     public String update(Authentication authentication, NoteForm noteForm, Model model, HttpSession session) throws Exception {

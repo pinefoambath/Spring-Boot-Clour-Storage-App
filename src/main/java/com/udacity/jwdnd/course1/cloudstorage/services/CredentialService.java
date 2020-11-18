@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
+import com.udacity.jwdnd.course1.cloudstorage.model.CredentialForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.NoteForm;
@@ -43,12 +44,12 @@ public class CredentialService {
         return credentials;
     }
 
-    public void insert(Credential credential, int userId) {
-        credentialMapper.insert(encryptValue(credential), userId);
+    public void insert(CredentialForm credentialForm) {
+        credentialMapper.insert(encryptValue(credentialForm));
     }
 
-    public void update(Credential credential, int userId) {
-        credentialMapper.update(encryptValue(credential), userId);
+    public void update(Credential credential) {
+        credentialMapper.update(encryptValue(credential));
     }
 
     public void delete(int credentialId) {
