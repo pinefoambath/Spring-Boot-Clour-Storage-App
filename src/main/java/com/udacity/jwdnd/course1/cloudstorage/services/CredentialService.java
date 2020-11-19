@@ -19,6 +19,8 @@ public class CredentialService {
     private CredentialMapper credentialMapper;
     private EncryptionService encryptionService;
     private CredentialForm credentialForm;
+    public CredentialService credentialService;
+
 
 //    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, CredentialForm credentialForm) {
 //        this.credentialMapper = credentialMapper;
