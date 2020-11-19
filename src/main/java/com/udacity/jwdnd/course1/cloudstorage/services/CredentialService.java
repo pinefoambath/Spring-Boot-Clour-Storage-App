@@ -20,11 +20,11 @@ public class CredentialService {
     private EncryptionService encryptionService;
     private CredentialForm credentialForm;
 
-    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, CredentialForm credentialForm) {
-        this.credentialMapper = credentialMapper;
-        this.encryptionService = encryptionService;
-        this.credentialForm = credentialForm;
-    }
+//    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, CredentialForm credentialForm) {
+//        this.credentialMapper = credentialMapper;
+//        this.encryptionService = encryptionService;
+//        this.credentialForm = credentialForm;
+//    }
 
     private Credential encryptValue(Credential credential) {
         String key = RandomStringUtils.random(16, true, true);
@@ -47,11 +47,11 @@ public class CredentialService {
     }
 
     public void insert(CredentialForm credentialForm) {
-        credentialMapper.insert(credentialForm.getUrl, credentialForm.getUsername, credentialForm.getPassword, credentialForm.getKey, credentialForm.getUserId);
+        credentialMapper.insert(credentialForm.getUrl(), credentialForm.getUserName(), credentialForm.getPassword(), credentialForm.getKey(), credentialForm.getUserId());
     }
 
     public void update(CredentialForm credentialForm) {
-        credentialMapper.update(credentialForm.getUrl, credentialForm.getUsername, credentialForm.getPassword, credentialForm.getKey, credentialForm.getUserId);
+        credentialMapper.update(credentialForm.getUrl(), credentialForm.getUserName(), credentialForm.getPassword(), credentialForm.getKey(), credentialForm.getUserId());
     }
 
     public void delete(int credentialId) {

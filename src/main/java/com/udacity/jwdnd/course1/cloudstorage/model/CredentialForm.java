@@ -5,12 +5,32 @@ public class CredentialForm {
     private String url;
     private String userName;
     private String password;
+    private Integer userId;
+    private Integer key;
 
-    public CredentialForm(Integer credentialId, String url, String userName, String password) {
+    public CredentialForm(Integer credentialId, String url, String userName, String password, Integer userId, Integer key) {
         this.credentialId = credentialId;
         this.url = url;
         this.userName = userName;
         this.password = password;
+        this.userId = userId;
+        this.key = key;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
+        this.key = key;
     }
 
     public Integer getCredentialId() {
