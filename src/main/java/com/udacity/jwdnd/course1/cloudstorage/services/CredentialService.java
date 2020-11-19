@@ -18,10 +18,12 @@ public class CredentialService {
 
     private CredentialMapper credentialMapper;
     private EncryptionService encryptionService;
+    private CredentialForm credentialForm;
 
-    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService) {
+    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, CredentialForm credentialForm) {
         this.credentialMapper = credentialMapper;
         this.encryptionService = encryptionService;
+        this.credentialForm = credentialForm;
     }
 
     private Credential encryptValue(Credential credential) {
@@ -45,11 +47,11 @@ public class CredentialService {
     }
 
     public void insert(CredentialForm credentialForm) {
-        credentialMapper.insert(credentialForm.url, credentialForm.username, credentialForm.password, credentialForm.key, credentialForm.userId);;
+        credentialMapper.insert(credentialForm.getUrl, credentialForm.getUsername, credentialForm.getPassword, credentialForm.getKey, credentialForm.getUserId);
     }
 
     public void update(CredentialForm credentialForm) {
-        credentialMapper.update(credentialForm.url, credentialForm.username, credentialForm.password, credentialForm.key, credentialForm.userId););
+        credentialMapper.update(credentialForm.getUrl, credentialForm.getUsername, credentialForm.getPassword, credentialForm.getKey, credentialForm.getUserId);
     }
 
     public void delete(int credentialId) {
