@@ -25,12 +25,16 @@ public class AuthenticationService implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-
+        // we check the username given by the user at log in stage, then
+        //we add the stored salt to to, pass this to the encryption service and
+        //if this is the same as the stored hashed password, we will then issue an authentication token
         User user = userMapper.getUser(username);
         if (user != null) {
             String encodedSalt = user.getSalt();
             String hashedPassword = hashService.getHashedValue(password, encodedSalt);
             if (user.getPassword().equals(hashedPassword)) {
+                // returning this basically means log in was successful
+                // arraylist here is a list of additional special granted permissions, though in this case there are no extra permissions
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
         }

@@ -45,11 +45,11 @@ public class CredentialService {
     }
 
     public void insert(CredentialForm credentialForm) {
-        credentialMapper.insert(encryptValue(credentialForm));
+        credentialMapper.insert(credentialForm.url, credentialForm.username, credentialForm.password, credentialForm.key, credentialForm.userId);;
     }
 
-    public void update(Credential credential) {
-        credentialMapper.update(encryptValue(credential));
+    public void update(CredentialForm credentialForm) {
+        credentialMapper.update(credentialForm.url, credentialForm.username, credentialForm.password, credentialForm.key, credentialForm.userId););
     }
 
     public void delete(int credentialId) {
