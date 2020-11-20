@@ -20,7 +20,7 @@ public interface CredentialMapper {
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     int addFile(File file);
 
-    @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userId) " +
+    @Insert("INSERT INTO credentials (url, username, key, password, userId) " +
             "VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
     int insert(String url, String username, String password, Integer key, Integer userId);

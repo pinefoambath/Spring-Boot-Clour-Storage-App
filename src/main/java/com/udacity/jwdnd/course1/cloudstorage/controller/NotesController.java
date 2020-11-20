@@ -32,15 +32,15 @@ public class NotesController {
         model.addAttribute("User", user);
         Integer userId = user.getUserId();
         //check if there are any notes to update, otherwise insert new note
-        if(this.noteForm.getNoteId() == null) {
-            this.noteService.insertNote(this.noteForm);
+        if(noteForm.getNoteId() == null) {
+            this.noteService.insertNote(noteForm);
         } else {
-            this.noteService.updateNote(this.note);
+            // Set the attributes of note here e.g
+//            note.setTitle(noteForm.title);
+            this.noteService.updateNote(note);
         }
-
         return "/home";
     }
-
     @GetMapping("/notes/delete")
     public String deleteNote(int noteId) {
         if (noteId > 0) {
@@ -50,7 +50,6 @@ public class NotesController {
         return "/notes";
     }
 }
-
 
 
 
