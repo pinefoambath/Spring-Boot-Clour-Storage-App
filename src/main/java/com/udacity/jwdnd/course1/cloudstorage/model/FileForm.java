@@ -9,14 +9,7 @@ public class FileForm {
     private Integer userId;
     private Byte[] fileData;
 
-    public FileForm(Integer fileId, String fileName, String contentType, String fileSize, Integer userId, Byte[] fileData) {
-        this.fileId = fileId;
-        this.fileName = fileName;
-        this.contentType = contentType;
-        this.fileSize = fileSize;
-        this.userId = userId;
-        this.fileData = fileData;
-    }
+    public FileForm() {}
 
     public Integer getFileId() {
         return fileId;

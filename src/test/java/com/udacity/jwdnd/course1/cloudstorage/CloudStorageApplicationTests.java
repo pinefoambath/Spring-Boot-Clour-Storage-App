@@ -379,40 +379,4 @@ class CloudStorageApplicationTests {
 		wait.until(ExpectedConditions.elementToBeClickable(deleteElement)).click();
 		Assertions.assertEquals("Result", driver.getTitle());
 	}
-
-	@Test
-	//URL redirection
-	public void urlRedirectsToErrorPage() {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String firstName = "Erin";
-		String lastName = "schmidt";
-		String username = "sasuke";
-		String password = "1234";
-
-		//signup
-		driver.get(baseUrl + "/signup");
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("inputFirstName"))));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputFirstName")));
-		jse.executeScript("arguments[0].value='" + firstName + "';", driver.findElement(By.id("inputFirstName")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputLastName")));
-		jse.executeScript("arguments[0].value='" + lastName + "';", driver.findElement(By.id("inputLastName")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputUsername")));
-		jse.executeScript("arguments[0].value='" + username + "';", driver.findElement(By.id("inputUsername")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputPassword")));
-		jse.executeScript("arguments[0].value='" + password + "';", driver.findElement(By.id("inputPassword")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("submit-button")));
-		//login
-		wait.until(ExpectedConditions.titleContains("Login"));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputUsername")));
-		jse.executeScript("arguments[0].value='" + username + "';", driver.findElement(By.id("inputUsername")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("inputPassword")));
-		jse.executeScript("arguments[0].value='" + password + "';", driver.findElement(By.id("inputPassword")));
-		jse.executeScript("arguments[0].click();", driver.findElement(By.id("login-button")));
-
-		wait.until(ExpectedConditions.titleContains("Home"));
-		driver.get(baseUrl + "/home/helooooo");
-		wait.until(ExpectedConditions.titleContains("Error"));
-		Assertions.assertEquals("Error", driver.getTitle());
-	}
 }

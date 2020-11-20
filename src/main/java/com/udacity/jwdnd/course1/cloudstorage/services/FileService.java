@@ -30,7 +30,8 @@ public class FileService {
         Integer userId = fileForm.getUserId();
         Byte[] fileData = fileForm.getFileData();
         String fileSize = fileForm.getFileSize();
-        this.fileMapper.addFile(fileName, contentType, fileSize, userId, fileData);
+        File file = new File(fileName, contentType, fileSize, userId, fileData);
+        this.fileMapper.addFile(file);
         return true;
     }
 

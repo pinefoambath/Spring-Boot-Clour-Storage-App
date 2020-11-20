@@ -17,9 +17,9 @@ public interface FileMapper {
     @Select("SELECT * FROM FILES WHERE userId = #{userId}")
     List<File> getFileByUserId(Integer fileId);
 
-    @Insert("INSERT INTO FILES(fileName) VALUES(#{fileName)")
-    @Options(useGeneratedKeys = true, keyProperty = "fileId")
-    int addFile(String fileName, String contentType, String fileSize, Integer userId, Byte[] fileData);
+    @Insert("INSERT INTO FILES(fileName, contentType, fileData, userId) VALUES(#{fileName}, #{contentType}, #{fileData}, #{userId})")
+    @Options(useGeneratedKeys = true, keyProperty = "fileId", keyColumn = "fileId")
+    int addFile(File file);
 
     @Delete("DELETE FROM FILES WHERE fileId = #{fileId}")
     void delete(Integer fileId);
