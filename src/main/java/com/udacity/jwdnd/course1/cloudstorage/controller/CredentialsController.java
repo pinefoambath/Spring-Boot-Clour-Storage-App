@@ -45,7 +45,7 @@ public class CredentialsController {
         return "home";
     }
 
-    //delete credentials
+    //DELETE credentials
     @GetMapping("/credentials/delete")
     public String delete(int credentialId) {
         if (credentialId > 0) {

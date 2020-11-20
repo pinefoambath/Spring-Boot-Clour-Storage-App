@@ -8,14 +8,7 @@ public class CredentialForm {
     private Integer userId;
     private Integer key;
 
-    public CredentialForm(Integer credentialId, String url, String userName, String password, Integer userId, Integer key) {
-        this.credentialId = credentialId;
-        this.url = url;
-        this.userName = userName;
-        this.password = password;
-        this.userId = userId;
-        this.key = key;
-    }
+    public CredentialForm() {}
 
     public Integer getUserId() {
         return userId;
