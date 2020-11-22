@@ -5,7 +5,10 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+//if we use the @Repository annotation here we can include UserMapper in the ApplicationContext
+@Repository
 @Mapper
 public interface UserMapper {
     @Select("SELECT * FROM USERS WHERE username = #{username}")

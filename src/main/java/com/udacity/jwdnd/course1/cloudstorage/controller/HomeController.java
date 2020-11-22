@@ -35,7 +35,10 @@ public class HomeController {
         this.authenticationService = authenticationService;
     }
 
-    @RequestMapping
+//    it is good preactice to use GetMapping rather than RequestMapping in getHomePage
+//    also good practice to name attributes with lower case letters
+
+    @GetMapping
     // need to tell it that some methods in here throw exceptions
     public String getHomePage(Authentication authentication, Model model) throws Exception {
         String username = authentication.getName();
@@ -45,11 +48,11 @@ public class HomeController {
         List<Credential> credentials = credentialService.getCredentialsByUserId(user.getUserId());
         // as we will be using the contents on the home html page we need to use the addAttribute method:
         model.addAttribute("fileForm", new FileForm());
-        model.addAttribute("Files", files);
+        model.addAttribute("files", files);
         model.addAttribute("noteForm", new NoteForm());
-        model.addAttribute("Notes", notes);
+        model.addAttribute("notes", notes);
         model.addAttribute("credentialForm", new CredentialForm());
-        model.addAttribute("Credentials", credentials);
+        model.addAttribute("credentials", credentials);
 //        model.addAttribute("credentialForm", new CredentialForm());
         return "home";
     }

@@ -26,21 +26,17 @@ public class NoteService {
         return notes;
     }
 
-    public Boolean insertNote(NoteForm noteForm) {
-        String noteTitle = noteForm.getNoteTitle();
-        String noteDescription = noteForm.getNoteDescription();
-        Integer userId = noteForm.getUserId();
-        this.noteMapper.insert(noteTitle, noteDescription, userId);
-        return true;
+    // leave the return method as void here; we will use Note and directly hand Note to the NoteMapper insert method
+    public void insertNote (Note note) {
+        noteMapper.insert(note);
     }
 
-    public Boolean updateNote(Note note) {
-
+    public void updateNote(Note note) {
         String noteTitle = note.getNoteTitle();
         String noteDescription = note.getNoteDescription();
         Integer noteId = note.getNoteId();
-        this.noteMapper.update(noteTitle, noteDescription, noteId);
-        return true;
+
+        noteMapper.update(noteTitle, noteDescription, noteId);
     }
 
     public Boolean deleteNote(int noteId) {
