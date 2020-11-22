@@ -1,12 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
-
-import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialForm;
-import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
-import com.udacity.jwdnd.course1.cloudstorage.model.Note;
-import com.udacity.jwdnd.course1.cloudstorage.model.NoteForm;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -23,15 +18,9 @@ public class CredentialService {
     public CredentialService(CredentialMapper credentialMapper)
 
     {
-
         this.credentialMapper = credentialMapper;
-
     }
-//    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, CredentialForm credentialForm) {
-//        this.credentialMapper = credentialMapper;
-//        this.encryptionService = encryptionService;
-//        this.credentialForm = credentialForm;
-//    }
+
 
     private Credential encryptValue(Credential credential) {
         String key = RandomStringUtils.random(16, true, true);
@@ -53,22 +42,18 @@ public class CredentialService {
         return credentials;
     }
 
-    public void insert(CredentialForm credentialForm) {
-        Credential credential = new Credential();
-        credential.setPassword(credentialForm.getPassword());
-        credential = encryptValue(credential);
-        credential.setUrl(credentialForm.getUserId());
-        credential.setUserName(credentialForm.getUserName());
-        credentialMapper.update(credential);
+    public void insert (Credential credential) {
+       credentialMapper.insert(credential);
     }
 
-    public void update(CredentialForm credentialForm) {
-        Credential credential = new Credential();
-        credential.setPassword(credentialForm.getPassword());
-        credential = encryptValue(credential);
-        credential.setUrl(credentialForm.getUserId());
-        credential.setUserName(credentialForm.getUserName());
-        credentialMapper.update(credential);
+    public void update(Credential credential) {
+        String url = credential.getUrl();
+        String username = credential.getUserName();
+        String key = credential.getKey();
+        Integer userId = credential.getUserId();
+        String password_plain = credential.getPassword();
+        String password = encryptValue(password_plain, key);
+        credentialMapper.update(url, username, password, key, userId);
     }
 
     public void delete(int credentialId) {
