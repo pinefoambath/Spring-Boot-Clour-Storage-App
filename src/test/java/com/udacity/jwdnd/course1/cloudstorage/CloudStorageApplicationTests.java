@@ -239,7 +239,7 @@ class CloudStorageApplicationTests {
 		WebElement deleteElement = null;
 		for (int i = 0; i < notesList.size(); i++) {
 			WebElement element = notesList.get(i);
-			deleteElement = element.findElement(By.name("delete"));
+			deleteElement = element.findElement(By.name("delete-note"));
 			if (deleteElement != null) {
 				break;
 			}

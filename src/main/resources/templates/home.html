@@ -81,7 +81,7 @@
                         <tr th:each="note : ${notes}">
                             <td>
                                 <button type="button" class="btn btn-success" th:onClick="javascript:showNoteModal([[${note}]])">Edit</button>
-                                <a class="btn btn-danger" th:href="${'/delete-note/'+note.noteId}">Delete</a>
+                                <a class="btn btn-danger" th:href="${'/delete-note/'+note.noteId}" id="delete_note">Delete</a>
                             </td>
                             <th scope="row" th:text="${note.noteTitle}">Example Note Title</th>
                             <td th:text="${note.noteDescription}">Example Note Description </td>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
+                                <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();" id="save-changes")>Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                         <tbody>
                         <tr th:each="credential: ${credentials}">
                             <td>
-                                <button type="button" class="btn btn-success" th:onClick="javascript:showCredentialModal([[${credentialId, url, username, password}]])">Edit</button>
+                                <button type="button" class="btn btn-success" th:onClick="javascript:showCredentialModal([[${credentialId, url, username, password}]])" id="newcred">Edit</button>
                                 <a class="btn btn-danger" >Delete</a>
                             </td>
                             <th scope="row" th:text="${credential.url}">Example Credential URL</th>
