@@ -1,6 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.*;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpSession;
 
-
+@Controller
 public class CredentialsController {
 
     private CredentialService credentialService;
@@ -35,11 +36,12 @@ public class CredentialsController {
             User user = (User) session.getAttribute("loggeduser");
             model.addAttribute("User", user);
             Integer userId = user.getUserId();
+            credentialForm.setUserId(userId);
         //check if there are any credentials to update, otherwise insert new credentials
         if(this.credentialService.getCredentialsByUserId(userId) == null) {
-            this.credentialService.insert(this.credentialForm);
+            this.credentialService.insert(credentialForm);
         } else {
-            this.credentialService.update(this.credentialForm);
+            this.credentialService.update(credentialForm);
         }
 
         return "home";

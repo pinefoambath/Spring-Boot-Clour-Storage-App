@@ -54,11 +54,21 @@ public class CredentialService {
     }
 
     public void insert(CredentialForm credentialForm) {
-        credentialMapper.insert(credentialForm.getUrl(), credentialForm.getUserName(), credentialForm.getPassword(), credentialForm.getKey(), credentialForm.getUserId());
+        Credential credential = new Credential();
+        credential.setPassword(credentialForm.getPassword());
+        credential = encryptValue(credential);
+        credential.setUrl(credentialForm.getUserId());
+        credential.setUserName(credentialForm.getUserName());
+        credentialMapper.update(credential);
     }
 
     public void update(CredentialForm credentialForm) {
-        credentialMapper.update(credentialForm.getUrl(), credentialForm.getUserName(), credentialForm.getPassword(), credentialForm.getKey(), credentialForm.getUserId());
+        Credential credential = new Credential();
+        credential.setPassword(credentialForm.getPassword());
+        credential = encryptValue(credential);
+        credential.setUrl(credentialForm.getUserId());
+        credential.setUserName(credentialForm.getUserName());
+        credentialMapper.update(credential);
     }
 
     public void delete(int credentialId) {

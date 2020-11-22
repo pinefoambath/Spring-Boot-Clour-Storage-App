@@ -20,14 +20,14 @@ public interface CredentialMapper {
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     int addFile(File file);
 
-    @Insert("INSERT INTO credentials (url, username, key, password, userId) " +
-            "VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
+    @Insert("INSERT INTO credentials(url, userName, key, password, userId) " +
+            "VALUES(#{url}, #{userName}, #{key}, #{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
-    int insert(String url, String username, String password, Integer key, Integer userId);
+    int insert(Credential credential);
 
 
     @Update("Update CREDENTIALS set url=#{url}, " +
-            " username=#{username}, key=#{key},  password=#{password}  WHERE credentialId=#{credentialId}")
+            " userName=#{userName}, key=#{key},  password=#{password}  WHERE credentialId=#{credentialId}")
     int update(String url, String username, String password, Integer key, Integer userId);
 
     @Delete("DELETE FROM CREDENTIALS WHERE credentialId = #{credentialId}")

@@ -35,7 +35,7 @@ public class HomeController {
         this.authenticationService = authenticationService;
     }
 
-//    it is good preactice to use GetMapping rather than RequestMapping in getHomePage
+//    it is good practice to use GetMapping rather than RequestMapping in getHomePage
 //    also good practice to name attributes with lower case letters
 
     @GetMapping

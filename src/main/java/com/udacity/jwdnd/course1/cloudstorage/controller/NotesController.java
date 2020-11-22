@@ -53,15 +53,15 @@ public class NotesController {
         model.addAttribute("credentialForm",new CredentialForm());
         List<Note> notes = noteService.getAllNotes(user.getUserId());
         model.addAttribute("notes",notes);
-        return "home";
+        return "/home";
     }
-    @GetMapping("/notes/delete")
+    @GetMapping("/delete-note")
     public String deleteNote(int noteId) {
         if (noteId > 0) {
             noteService.deleteNote(noteId);
             return "/home";
         }
-        return "/notes";
+        return "/home";
     }
 }
 

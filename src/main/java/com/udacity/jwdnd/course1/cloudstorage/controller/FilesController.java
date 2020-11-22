@@ -36,15 +36,15 @@ public class FilesController {
         fileForm.setFileSize(String.valueOf(fileUpload.getSize()));
         fileForm.setUserId(user.getUserId());
         fileService.addFile(fileForm);
-        return "success";
+        return "/home";
     }
     @GetMapping("/files/delete")
     public String deleteFile(int fileId) {
         if (fileId > 0) {
             fileService.deleteFile(fileId);
-            return "redirect:/result?success";
+            return "/home";
         }
-        return "redirect:/result?error";
+        return "/home";
     }
 }
 
