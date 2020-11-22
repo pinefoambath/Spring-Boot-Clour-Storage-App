@@ -15,18 +15,12 @@ public class CredentialService {
     private EncryptionService encryptionService;
     private CredentialForm credentialForm;
 
-    public CredentialService(CredentialMapper credentialMapper)
-
-    {
-        this.credentialMapper = credentialMapper;
-    }
+    public CredentialService(CredentialMapper credentialMapper) { this.credentialMapper = credentialMapper; }
 
 
-    private Credential encryptValue(Credential credential) {
-        String key = RandomStringUtils.random(16, true, true);
-        credential.setKey(key);
-        credential.setPassword(encryptionService.encryptValue(credential.getPassword(), key));
-        return credential;
+    private String encryptValue(String password_plain, String key) {
+       String password = encryptionService.encryptValue(password_plain, key);
+       return password;
     }
 
     private Credential decryptValue(Credential credential) {
@@ -49,8 +43,8 @@ public class CredentialService {
     public void update(Credential credential) {
         String url = credential.getUrl();
         String username = credential.getUserName();
-        String key = credential.getKey();
         Integer userId = credential.getUserId();
+        String key = RandomStringUtils.random(16, true, true);
         String password_plain = credential.getPassword();
         String password = encryptValue(password_plain, key);
         credentialMapper.update(url, username, password, key, userId);

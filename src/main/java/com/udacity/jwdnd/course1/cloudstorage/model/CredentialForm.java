@@ -6,7 +6,7 @@ public class CredentialForm {
     private String userName;
     private String password;
     private Integer userId;
-    private Integer key;
+    private String key;
 
     public CredentialForm() {}
 
@@ -18,11 +18,11 @@ public class CredentialForm {
         this.userId = userId;
     }
 
-    public Integer getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(Integer key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
