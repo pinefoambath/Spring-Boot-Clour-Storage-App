@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -55,14 +56,17 @@ public class NotesController {
         model.addAttribute("notes",notes);
         return "/home";
     }
-    @GetMapping("/delete-note")
-    public String deleteNote(int noteId) {
+    @GetMapping("/delete-note/{noteId}")
+    public String deleteNote(@PathVariable("noteId") String noteId) {
+        int noteId = Integer.parseInt(noteId);
         if (noteId > 0) {
             noteService.deleteNote(noteId);
             return "/home";
         }
         return "/home";
     }
+
+
 }
 
 
