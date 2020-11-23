@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,14 +39,16 @@ public class FilesController {
         fileService.addFile(fileForm);
         return "/home";
     }
-    @GetMapping("/files/delete")
-    public String deleteFile(int fileId) {
-        if (fileId > 0) {
-            fileService.deleteFile(fileId);
-            return "/home";
+
+    @GetMapping("/delete-file/{fileId}")
+    public String deleteFile(@PathVariable("fileId") String fileId) {
+        if (Integer.parseInt(fileId) > 0) {
+            fileService.deleteFile(Integer.parseInt(fileId));
+            return "redirect:/home";
         }
-        return "/home";
+        return "redirect:/home";
     }
+
 }
 
 

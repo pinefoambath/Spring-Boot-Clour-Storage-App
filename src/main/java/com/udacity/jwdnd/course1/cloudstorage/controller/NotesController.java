@@ -56,14 +56,14 @@ public class NotesController {
         model.addAttribute("notes",notes);
         return "/home";
     }
+
     @GetMapping("/delete-note/{noteId}")
     public String deleteNote(@PathVariable("noteId") String noteId) {
-        int noteId = Integer.parseInt(noteId);
-        if (noteId > 0) {
-            noteService.deleteNote(noteId);
-            return "/home";
+        if (Integer.parseInt(noteId) > 0) {
+            noteService.deleteNote(Integer.parseInt(noteId));
+            return "redirect:/home";
         }
-        return "/home";
+        return "redirect:/home";
     }
 
 

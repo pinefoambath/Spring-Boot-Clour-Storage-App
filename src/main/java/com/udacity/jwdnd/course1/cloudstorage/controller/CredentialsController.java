@@ -5,6 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
@@ -43,15 +44,14 @@ public class CredentialsController {
         return "/home";
     }
 
-
-    //DELETE credentials
-    @GetMapping("/credentials/delete")
-    public String delete(int credentialId) {
-        if (credentialId > 0) {
-            credentialService.delete(credentialId);
-            return "home";
-        }
-        return "/credentials";
+    @GetMapping("/delete-credential/{credentialId}")
+    public String deleteCredential(@PathVariable("credentialId") String credentialId) {
+            if (Integer.parseInt(credentialId) > 0) {
+                credentialService.delete(Integer.parseInt(credentialId));
+                return "redirect:/home";
+            }
+        return "redirect:/home";
     }
+
 
 }

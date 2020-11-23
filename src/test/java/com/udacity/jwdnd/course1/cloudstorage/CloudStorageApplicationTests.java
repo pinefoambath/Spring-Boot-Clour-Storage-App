@@ -331,7 +331,7 @@ class CloudStorageApplicationTests {
 		WebElement savechanges = driver.findElement(By.id("save-credential"));
 		savechanges.click();
 		Assertions.assertEquals("Result", driver.getTitle());
-
+		//TODO: this needs changing to notes
 		//check the updated note
 		driver.get("http://localhost:" + this.port + "/home");
 		credTab = driver.findElement(By.id("nav-credentials-tab"));
