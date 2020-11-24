@@ -36,22 +36,21 @@ public class CredentialService {
         return credentials;
     }
 
-    public void insert (Credential credential) {
-       credentialMapper.insert(credential);
-    }
+    public void insert (Credential credential) { credentialMapper.insert(credential); }
 
-    public void update(Credential credential) {
-        String url = credential.getUrl();
-        String username = credential.getUserName();
-        Integer userId = credential.getUserId();
-        String key = RandomStringUtils.random(16, true, true);
-        String password_plain = credential.getPassword();
-        String password = encryptValue(password_plain, key);
-        credentialMapper.update(url, username, password, key, userId);
-    }
+    public void update(Credential credential) { credentialMapper.update(credential); }
+//
 
     public void delete(int credentialId) {
         credentialMapper.delete(credentialId);
     }
 
 }
+//    String url = credential.getUrl();
+//        String username = credential.getUserName();
+//        Integer userId = credential.getUserId();
+//        String key = RandomStringUtils.random(16, true, true);
+//        String password_plain = credential.getPassword();
+//        String password = encryptValue(password_plain, key);
+//        credentialMapper.update(url, username, password, key, userId);
+//    }

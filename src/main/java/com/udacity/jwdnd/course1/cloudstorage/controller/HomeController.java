@@ -25,14 +25,16 @@ public class HomeController {
     private final CredentialService credentialService;
     private UserMapper userMapper;
     private AuthenticationService authenticationService;
+    private EncryptionService encryptionService;
 
-    public HomeController(UserService userService, NoteService noteService, FileService fileService, CredentialService credentialService, UserMapper userMapper, AuthenticationService authenticationService) {
+    public HomeController(UserService userService, NoteService noteService, FileService fileService, CredentialService credentialService, UserMapper userMapper, AuthenticationService authenticationService, EncryptionService encryptionService) {
         this.userService = userService;
         this.noteService = noteService;
         this.fileService = fileService;
         this.credentialService = credentialService;
         this.userMapper = userMapper;
         this.authenticationService = authenticationService;
+        this.encryptionService = encryptionService;
     }
 
 //    it is good practice to use GetMapping rather than RequestMapping in getHomePage
@@ -53,6 +55,7 @@ public class HomeController {
         model.addAttribute("notes", notes);
         model.addAttribute("credentialForm", new CredentialForm());
         model.addAttribute("credentials", credentials);
+        model.addAttribute("encryptionService",encryptionService);
 //        model.addAttribute("credentialForm", new CredentialForm());
         return "home";
     }
