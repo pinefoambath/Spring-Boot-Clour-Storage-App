@@ -30,6 +30,7 @@ public class FilesController {
         if (fileUpload.isEmpty()) {
             return "redirect:/result?error";
         }
+
         FileForm fileForm = new FileForm();
         fileForm.setContentType(fileUpload.getContentType());
         fileForm.setFileName(fileUpload.getName());
@@ -37,16 +38,20 @@ public class FilesController {
         fileForm.setFileSize(String.valueOf(fileUpload.getSize()));
         fileForm.setUserId(user.getUserId());
         fileService.addFile(fileForm);
-        return "/home";
+        Boolean isSuccess = true;
+         return "/result?isSuccess=" + isSuccess;
     }
 
     @GetMapping("/delete-file/{fileId}")
     public String deleteFile(@PathVariable("fileId") String fileId) {
         if (Integer.parseInt(fileId) > 0) {
             fileService.deleteFile(Integer.parseInt(fileId));
-            return "redirect:/home";
+            Boolean isSuccess = true;
+//            return "redirect:/home";
+              return "redirect:/result?isSuccess=" + isSuccess;
         }
-        return "redirect:/home";
+        Boolean isSuccess = false;
+        return "redirect:/result?isSuccess=" + false + "&errorType" + 1;
     }
 
 }

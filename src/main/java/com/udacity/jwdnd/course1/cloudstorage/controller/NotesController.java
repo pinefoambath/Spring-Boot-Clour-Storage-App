@@ -58,9 +58,9 @@ public class NotesController {
     }
 
     @GetMapping("/delete-note/{noteId}")
-    public String deleteNote(@PathVariable("noteId") String noteId) {
-        if (Integer.parseInt(noteId) > 0) {
-            noteService.deleteNote(Integer.parseInt(noteId));
+    public String deleteNote(@PathVariable("noteId") int noteId) {
+        if (noteId > 0) {
+            noteService.deleteNote(noteId);
             return "redirect:/home";
         }
         return "redirect:/home";
