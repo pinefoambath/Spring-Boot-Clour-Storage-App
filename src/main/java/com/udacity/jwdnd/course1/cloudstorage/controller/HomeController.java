@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 // telling it that this controller oversees everything in the /home folder
@@ -56,8 +60,24 @@ public class HomeController {
         model.addAttribute("credentialForm", new CredentialForm());
         model.addAttribute("credentials", credentials);
         model.addAttribute("encryptionService",encryptionService);
-//        model.addAttribute("credentialForm", new CredentialForm());
         return "home";
     }
 
+    @GetMapping("/result")
+    public String showResult(
+            Authentication authentication,
+            @RequestParam(required = false, name = "isSuccess") Boolean isSuccess,
+            @RequestParam(required = false, name = "errorType") Integer errorType,
+            Model model
+    ) {
+
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("isSuccess", isSuccess);
+        data.put("errorType", errorType);
+
+        model.addAllAttributes(data);
+
+        return "result";
+    }
 }

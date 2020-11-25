@@ -31,6 +31,10 @@ public class FilesController {
             return "redirect:/result?error";
         }
 
+        if (fileService.checkFileName(fileForm)) {
+            return "redirect:/result?Error" + "&errorType" + 2;
+        }
+
         FileForm fileForm = new FileForm();
         fileForm.setContentType(fileUpload.getContentType());
         fileForm.setFileName(fileUpload.getName());
@@ -39,7 +43,8 @@ public class FilesController {
         fileForm.setUserId(user.getUserId());
         fileService.addFile(fileForm);
         Boolean isSuccess = true;
-         return "/result?isSuccess=" + isSuccess;
+        // make sure to use redirect:/, as with just "/home" the Controller wouldn't be invoked at the backend
+         return "redirect:/result?isSuccess=" + isSuccess;
     }
 
     @GetMapping("/delete-file/{fileId}")
@@ -47,7 +52,6 @@ public class FilesController {
         if (Integer.parseInt(fileId) > 0) {
             fileService.deleteFile(Integer.parseInt(fileId));
             Boolean isSuccess = true;
-//            return "redirect:/home";
               return "redirect:/result?isSuccess=" + isSuccess;
         }
         Boolean isSuccess = false;
