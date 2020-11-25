@@ -1,6 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
+import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileForm;
@@ -9,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FilesController {
@@ -21,30 +20,36 @@ public class FilesController {
     private FileService fileService;
     private AuthenticationService authenticationService;
     private FileForm fileForm;
+
     @Autowired
     private UserMapper userMapper;
+
     @PostMapping("/files")
-    public String insertFile(Authentication authentication, MultipartFile fileUpload) throws Exception {
+    public String insertFile(Authentication authentication, @ModelAttribute("newfile") FileForm newFile, MultipartFile fileUpload) throws Exception {
         String username = authentication.getName();
         User user = userMapper.getUser(username);
+
         if (fileUpload.isEmpty()) {
-            return "redirect:/result?error";
+            return "redirect:/home/result?error";
         }
 
-        if (fileService.checkFileName(fileForm)) {
-            return "redirect:/result?Error" + "&errorType" + 2;
+        Integer userId = user.getUserId();
+        String[] files = fileService.getAllFiles(userId);
+        MultipartFile multipartFile = newFile.getFile();
+        String fileName = multipartFile.getOriginalFilename();
+        boolean fileIsDuplicate = false;
+        for (String file: files) {
+            if (file.equals(fileName)) {
+                fileIsDuplicate = true;
+
+                break;
+            }
         }
 
-        FileForm fileForm = new FileForm();
-        fileForm.setContentType(fileUpload.getContentType());
-        fileForm.setFileName(fileUpload.getName());
-        fileForm.setFileData(ArrayUtils.toObject(fileUpload.getBytes()));
-        fileForm.setFileSize(String.valueOf(fileUpload.getSize()));
-        fileForm.setUserId(user.getUserId());
-        fileService.addFile(fileForm);
+        fileService.addFile(multipartFile, username);
         Boolean isSuccess = true;
         // make sure to use redirect:/, as with just "/home" the Controller wouldn't be invoked at the backend
-         return "redirect:/result?isSuccess=" + isSuccess;
+         return "redirect:/home/result?isSuccess=" + isSuccess;
     }
 
     @GetMapping("/delete-file/{fileId}")
@@ -52,12 +57,16 @@ public class FilesController {
         if (Integer.parseInt(fileId) > 0) {
             fileService.deleteFile(Integer.parseInt(fileId));
             Boolean isSuccess = true;
-              return "redirect:/result?isSuccess=" + isSuccess;
+            return "redirect:/home/result?isSuccess=" + isSuccess;
         }
         Boolean isSuccess = false;
-        return "redirect:/result?isSuccess=" + false + "&errorType" + 1;
+        return "redirect:/home/result?isSuccess=" + false + "&errorType" + 1;
     }
 
+    public @ResponseBody
+    byte[] getFile(@PathVariable String fileName) {
+        return fileService.getFile(fileName).getFileData();
+    }
 }
 
 
