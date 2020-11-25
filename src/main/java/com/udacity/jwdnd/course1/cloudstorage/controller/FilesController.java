@@ -53,9 +53,9 @@ public class FilesController {
     }
 
     @GetMapping("/delete-file/{fileId}")
-    public String deleteFile(@PathVariable("fileId") String fileId) {
-        if (Integer.parseInt(fileId) > 0) {
-            fileService.deleteFile(Integer.parseInt(fileId));
+    public String deleteFile(@PathVariable("fileId") int fileId) {
+        if (fileId > 0) {
+            fileService.deleteFile(fileId);
             Boolean isSuccess = true;
             return "redirect:/home/result?isSuccess=" + isSuccess;
         }
