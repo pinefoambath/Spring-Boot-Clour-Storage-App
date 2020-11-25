@@ -222,7 +222,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertTrue(deleted);
 	}
 
-    //	Write a test that creates a set of credentials, verifies that they are displayed, and verifies that the displayed password is encrypted.
+    @Order(9)//	Write a test that creates a set of credentials, verifies that they are displayed, and verifies that the displayed password is encrypted.
 	@Test
 	public void createCredentials() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -247,9 +247,9 @@ class CloudStorageApplicationTests {
 		credUsername.sendKeys(userName);
 		WebElement credPassword = driver.findElement(By.id("credential-password"));
 		credPassword.sendKeys(password);
-		WebElement submit = driver.findElement(By.id("save-credential"));
+		WebElement submit = driver.findElement(By.id("credentialSubmit"));
 		submit.click();
-		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("Home", driver.getTitle());
 
 		//check for credential
 		driver.get("http://localhost:" + this.port + "/home");
@@ -269,6 +269,7 @@ class CloudStorageApplicationTests {
 	}
 
 	//Write a test that views an existing set of credentials, verifies that the viewable password is unencrypted, edits the credentials, and verifies that the changes are displayed.
+	@Order(10)
 	@Test
 	public void updateCredential() {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -282,7 +283,7 @@ class CloudStorageApplicationTests {
 		inputPassword.sendKeys(password);
 		WebElement loginButton = driver.findElement(By.id("login-button"));
 		loginButton.click();
-		Assertions.assertEquals("Home", driver.getTitle());
+		Assertions.assertEquals("home", driver.getTitle());
 
 		//update credential
 		WebElement credTab = driver.findElement(By.id("nav-credentials-tab"));
@@ -320,7 +321,7 @@ class CloudStorageApplicationTests {
 		}
 		Assertions.assertTrue(edited);
 	}
-
+	@Order(11)
 	@Test
 	//Write a test that deletes an existing set of credentials and verifies that the credentials are no longer displayed.
 	public void credentialDeletionTest() {
