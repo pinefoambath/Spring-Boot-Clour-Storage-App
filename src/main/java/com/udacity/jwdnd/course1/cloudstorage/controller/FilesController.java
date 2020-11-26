@@ -41,7 +41,7 @@ public class FilesController {
 
         String fileName = fileUpload.getOriginalFilename();
         boolean fileIsDuplicate = false;
-        for (List<File>: files) {
+        for (String file: files) {
             if (file.equals(fileName)) {
                 fileIsDuplicate = true;
 
