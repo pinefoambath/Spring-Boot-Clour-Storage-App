@@ -25,8 +25,8 @@ public class FileService {
         this.userMapper = userMapper;
     }
 
-    public String[] getAllFiles(int userId) throws Exception {
-        String[] files = fileMapper.getFileByUserId(userId);
+    public List<File> getAllFiles(int userId) throws Exception {
+        List<File> files = fileMapper.getFileByUserId(userId);
         if (files == null) {
             throw new Exception();
         }

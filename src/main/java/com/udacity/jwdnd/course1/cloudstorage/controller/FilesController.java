@@ -13,6 +13,8 @@ import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 public class FilesController {
 
@@ -34,11 +36,12 @@ public class FilesController {
         }
 
         Integer userId = user.getUserId();
-        String[] files = fileService.getAllFiles(userId);
-        MultipartFile multipartFile = newFile.getFile();
-        String fileName = multipartFile.getOriginalFilename();
+        List<File> files = fileService.getAllFiles(user.getUserId());
+
+
+        String fileName = fileUpload.getOriginalFilename();
         boolean fileIsDuplicate = false;
-        for (String file: files) {
+        for (List<File>: files) {
             if (file.equals(fileName)) {
                 fileIsDuplicate = true;
 
@@ -46,7 +49,7 @@ public class FilesController {
             }
         }
 
-        fileService.addFile(multipartFile, username);
+        fileService.addFile(fileUpload, username);
         Boolean isSuccess = true;
         // make sure to use redirect:/, as with just "/home" the Controller wouldn't be invoked at the backend
          return "redirect:/home/result?isSuccess=" + isSuccess;
