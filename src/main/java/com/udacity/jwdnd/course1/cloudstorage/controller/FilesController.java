@@ -32,7 +32,7 @@ public class FilesController {
         User user = userMapper.getUser(username);
 
         if (fileUpload.isEmpty()) {
-            return "redirect:/home/result?isSuccess=" + false + "&errorType" + 1;
+            return "redirect:/home/result?isSuccess=" + false + "&errorType=" + 1;
         }
 
         Integer userId = user.getUserId();
@@ -44,7 +44,7 @@ public class FilesController {
         for (File file: files) {
             if (file.getFileName().equals(fileName)) {
                 fileIsDuplicate = true;
-                return "redirect:/home/result?isSuccess=" + false + "&errorType" + 2;
+                return "redirect:/home/result?isSuccess=" + false + "&errorType=" + 2;
 //                break;
             }
         }
@@ -63,7 +63,7 @@ public class FilesController {
             return "redirect:/home/result?isSuccess=" + isSuccess;
         }
         Boolean isSuccess = false;
-        return "redirect:/home/result?isSuccess=" + false + "&errorType" + 1;
+        return "redirect:/home/result?isSuccess=" + false + "&errorType=" + 1;
     }
 
     public @ResponseBody
