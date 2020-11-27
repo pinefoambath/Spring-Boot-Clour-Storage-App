@@ -41,11 +41,11 @@ public class FilesController {
 
         String fileName = fileUpload.getOriginalFilename();
         boolean fileIsDuplicate = false;
-        for (String file: files) {
-            if (file.equals(fileName)) {
+        for (File file: files) {
+            if (file.getFileName().equals(fileName)) {
                 fileIsDuplicate = true;
-
-                break;
+                return "redirect:/home/result?isSuccess=" + false + "&errorType" + 2;
+//                break;
             }
         }
 

@@ -49,7 +49,7 @@ public class HomeController {
     public String getHomePage(Authentication authentication, Model model) throws Exception {
         String username = authentication.getName();
         User user = userMapper.getUser(username);
-        String [] files = fileService.getAllFiles(user.getUserId());
+        List<File> files = fileService.getAllFiles(user.getUserId());
         List<Note> notes = noteService.getAllNotes(user.getUserId());
         List<Credential> credentials = credentialService.getCredentialsByUserId(user.getUserId());
         // as we will be using the contents on the home html page we need to use the addAttribute method:
