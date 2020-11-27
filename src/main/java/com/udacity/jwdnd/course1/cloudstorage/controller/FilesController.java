@@ -32,7 +32,7 @@ public class FilesController {
         User user = userMapper.getUser(username);
 
         if (fileUpload.isEmpty()) {
-            return "redirect:/home/result?error";
+            return "redirect:/home/result?isSuccess=" + false + "&errorType" + 1;
         }
 
         Integer userId = user.getUserId();
