@@ -302,7 +302,7 @@ class CloudStorageApplicationTests {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(By.id("nav-credentials-tab")));
 		WebElement filesTable = driver.findElement(By.id("userTable"));
 		List<WebElement> credentialsList = filesTable.findElements(By.tagName("th"));
-		Boolean edited = false;
+		Boolean edited = true;
 		for (int i = 0; i < credentialsList.size(); i++) {
 			WebElement element = credentialsList.get(i);
 			if (element.getAttribute("innerHTML").equals(newUserName)) {
@@ -330,7 +330,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Home", driver.getTitle());
 		WebElement filesTable = driver.findElement(By.id("userTable"));
 		List<WebElement> credentialsList = filesTable.findElements(By.tagName("th"));
-		Boolean deleted = false;
+		Boolean deleted = true;
 		for (int i = 0; i < credentialsList.size(); i++) {
 			WebElement element = credentialsList.get(i);
 			if (element.getAttribute("innerHTML").equals(newCredentialUserName)) {
@@ -340,6 +340,8 @@ class CloudStorageApplicationTests {
 		}
 		Assertions.assertTrue(deleted);
 	}
+
+	// old example code using the code base suggested in the course, no JS:
 //	public void credentialDeletionTest() {
 //		WebDriverWait wait = new WebDriverWait(driver, 30);
 //		JavascriptExecutor jse = (JavascriptExecutor) driver;
